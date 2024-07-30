@@ -316,7 +316,7 @@ func (s *shelf) GetSample(slot, off, length uint64) ([]byte, error) {
 		return nil, ErrClosed
 	}
 	buf := make([]byte, length)
-	if _, err := s.f.ReadAt(buf, int64(ShelfHeaderSize)+int64(slot)*int64(s.slotSize)+int64(off)); err != nil {
+	if _, err := s.f.ReadAt(buf, int64(ShelfHeaderSize)+int64(slot)*int64(s.slotSize)+int64(itemHeaderSize)+int64(off)); err != nil {
 		return nil, fmt.Errorf("%w: %v", ErrBadIndex, err)
 	}
 	return buf, nil
